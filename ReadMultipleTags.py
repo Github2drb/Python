@@ -22,44 +22,44 @@ def read_multiple_tags(plc_ip: str, tags: List[Tuple[str, str]]) -> Dict[str, An
 
 def interpret_tag_value(tag: str, value: Any, data_type: str) -> str:
     if data_type == "BOOL":
-        return "ON" if value else "OFF"
+        return "True" if value else "False"
     elif data_type in ["INT", "DINT"]:
-        return f"{value} (Integer)"
+        return f"{value}"
     elif data_type == "REAL":
-        return f"{value:.2f} (Float)"
+        return f"{value:.2f}"
     elif data_type == "STRING":
-        return f"'{value}' (String)"
+        return f"'{value}'"
     else:
         return str(value)
 
 # Replace with your PLC's IP address
-plc_ip = '192.168.1.100'
+plc_ip = '192.168.4.100'
 
 # List of tags to read with their expected data types
 tags_to_read = [
     ('EMG_STOP_PB', 'BOOL'),
-    ('MOTOR_1_SPEED', 'INT'),
-    ('TEMP_SENSOR_1', 'REAL'),
-    ('PROD_COUNT', 'DINT'),
-    ('BATCH_ID', 'STRING')
+    ('ST3_HOME_OK', 'Bool'),
+    ('OPRM_MSG', 'DINT'),
+    ('OPRM_HT_TOP', 'REAL'),
+    ('OPRM_HT_BOTTOM', 'REAL')
 ]
 
 # Read the tags
 tag_values = read_multiple_tags(plc_ip, tags_to_read)
 
 # Print the results
-print("Tag Values:")
+#print("Tag Values:")
 for tag, (value, data_type) in tag_values.items():
     interpreted_value = interpret_tag_value(tag, value, data_type)
-    print(f"{tag}: {interpreted_value}")
+    print(f"{interpreted_value}")
 
 # Additional processing for EMG_STOP_PB
-if "EMG_STOP_PB" in tag_values:
-    emg_stop_value, emg_stop_type = tag_values["EMG_STOP_PB"]
-    if emg_stop_type == "BOOL":
-        if emg_stop_value:
-            print("\nWARNING: Emergency Stop Button is PRESSED!")
-        else:
-            print("\nEmergency Stop Button is not pressed.")
-    else:
-        print(f"\nUnexpected data type for Emergency Stop Button: {emg_stop_type}")
+#if "EMG_STOP_PB" in tag_values:
+    #emg_stop_value, emg_stop_type = tag_values["EMG_STOP_PB"]
+    #if emg_stop_type == "BOOL":
+        #if emg_stop_value:
+            #print("\nWARNING: Emergency Stop Button is PRESSED!")
+        #else:
+            #print("\nEmergency Stop Button is not pressed.")
+    #else:
+        #print(f"\nUnexpected data type for Emergency Stop Button: {emg_stop_type}")
