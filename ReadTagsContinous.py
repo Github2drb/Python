@@ -8,7 +8,7 @@ STOP_FILE = "stop_signal.txt"
 def read_multiple_tags(plc: LogixDriver, tags: List[Tuple[str, str]]) -> Dict[str, Any]:
     # ... (keep this function as is)
 
-def interpret_tag_value(tag: str, value: Any, data_type: str) -> str:
+#def interpret_tag_value(tag: str, value: Any, data_type: str) -> str:
     # ... (keep this function as is)
 
 def check_stop_signal():
